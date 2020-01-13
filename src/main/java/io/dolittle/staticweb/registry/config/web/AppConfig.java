@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = {"io.dolittle.staticweb.registry.web"})
+@ComponentScan(basePackages = {"io.dolittle.staticweb.registry.web.rest"})
 public class AppConfig {
 
 }

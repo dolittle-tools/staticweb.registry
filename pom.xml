@@ -13,9 +13,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.dolittle.static-web</groupId>
-	<artifactId>repository</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<description>Receive static SPA content</description>
+	<artifactId>spa-registry</artifactId>
+	<version>1.0.0</version>
+	<description>Stores static SPA content to Azure storage container</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -25,10 +25,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -49,18 +45,14 @@
 			<version>${camel.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-mail</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-zipfile-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.microsoft.azure</groupId>
-			<artifactId>azure-storage-spring-boot-starter</artifactId>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-azure-starter</artifactId>
+			<version>${camel.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -100,38 +92,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack</id>
-						<phase>package</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>${project.groupId}</groupId>
-									<artifactId>${project.artifactId}</artifactId>
-									<version>${project.version}</version>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.9</version>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
-					<tag>${project.version}</tag>
-                </configuration>
-            </plugin>
 		</plugins>
 	</build>
 
